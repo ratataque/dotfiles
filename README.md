@@ -3,15 +3,15 @@ my dotfiles for my linux config
 
 
 ## Login manager sddm theme
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/ratataque/dotfiles/blob/main/images/env.png?raw=true)
+![alt text](https://github.com/ratataque/dotfiles/blob/main/images/desktop.png?raw=true)
 
 
 ## Fish
 - many alias
 - vim keybind
 
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/ratataque/dotfiles/blob/main/images/fish.png?raw=true)
 
 
 ## Discord vimified
