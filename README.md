@@ -1,5 +1,5 @@
 # My dotfiles
-my dotfiles for my linux config
+my dotfiles for my manjaro config
 
 
 ## Login manager sddm theme
