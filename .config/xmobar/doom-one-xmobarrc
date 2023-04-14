@@ -12,10 +12,10 @@
    -- trayer
    -- 'dtos-local-bin' (from dtos-core-repo)
 
-Config { font            = "xft:Ubuntu:weight=bold:pixelsize=23:antialias=true:hinting=true"
-       , additionalFonts = [ "xft:Mononoki:pixelsize=21:antialias=true:hinting=true"
-                           , "xft:Font Awesome 6 Free Solid:pixelsize=22"
-                           , "xft:Font Awesome 6 Brands:pixelsize=22"
+Config { font            = "Monoki Vera Sans Mono Bold 16"
+       , additionalFonts = [ "Bitstream Vera Sans Mono Bold 16"
+                           , "Bitstream Vera Sans Mono 16"
+                           , "Bitstream Vera Sans Mono 16"
                            ]
        , bgColor      = "#282c34"
        , fgColor      = "#ff6c6b"
@@ -24,7 +24,7 @@ Config { font            = "xft:Ubuntu:weight=bold:pixelsize=23:antialias=true:h
        --   an integer for the percentage width, so 100 would be 100%.
        --   an integer for the minimum pixel height for xmobar, so 24 would force a height of at least 24 pixels.
        --   NOTE: The height should be the same as the trayer (system tray) height.
-       , position       = TopSize L 100 24
+       , position       = TopSize L 100 35
        , lowerOnStart = True
        , hideOnStart  = False
        , allDesktops  = True
