@@ -9,6 +9,7 @@ my dotfiles for my linux config
 
 ## Fish
 - many alias
+- shortcut (alt+l -> ll)
 - vim keybind
 
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/fish.png?raw=true)
