@@ -5,6 +5,7 @@ my dotfiles for my linux config
 ## Login manager sddm theme
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/env.png?raw=true)
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/desktop.png?raw=true)
+![alt text](https://github.com/ratataque/dotfiles/blob/main/images/workflow.png?raw=true)
 
 
 ## Fish
