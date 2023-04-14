@@ -8,15 +8,15 @@ my dotfiles for my linux config
 
 
 ## Fish
-- many alias
-- shortcut (alt+l -> ll)
-- vim keybind
+- [x] many alias
+- [x] shortcut (alt+l -> ll)
+- [x] vim keybind
 
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/fish.png?raw=true)
 
 
 ## Discord vimified
-- with autokey script
+- [x] with autokey script
  
 
 ## Xmonad
