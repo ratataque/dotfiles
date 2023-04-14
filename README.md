@@ -19,7 +19,7 @@ my dotfiles for my manjaro config
 ## Discord vimified
 - [x] with autokey script
 
-![alt text](https://github.com/ratataque/dotfiles/blob/main/images/discord_bind.png?raw=true)
+![alt text](https://github.com/ratataque/dotfiles/blob/main/images/discord_binds.png?raw=true)
 
 ## Xmonad
 - [x] shortcut
