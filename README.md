@@ -55,7 +55,7 @@ my dotfiles for my manjaro config
 - [x] quickmark
 
 
-## Layout
+## Keyboard Layout
 - [x] qwerty
 - [x] caps -> ctrl
 - [x] alt right -> esc
