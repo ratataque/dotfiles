@@ -2,10 +2,14 @@
 my dotfiles for my manjaro config
 
 
-## Login manager sddm theme
+## Desktop
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/env.png?raw=true)
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/desktop.png?raw=true)
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/workflow.png?raw=true)
+
+
+## Login manager sddm theme
+![alt text](https://github.com/ratataque/dotfiles/blob/main/images/sddm_theme.png?raw=true)
 
 
 ## Fish
@@ -20,6 +24,7 @@ my dotfiles for my manjaro config
 - [x] with autokey script
 
 ![alt text](https://github.com/ratataque/dotfiles/blob/main/images/discord_binds.png?raw=true)
+
 
 ## Xmonad
 - [x] shortcut
