@@ -1,5 +1,4 @@
-#  ____ _____
-# |  _ \_   _|  Derek Taylor (DistroTube)
+#  ____ _____ |  _ \_   _|  Derek Taylor (DistroTube)
 # | | | || |    http://www.youtube.com/c/DistroTube
 # | |_| || |    http://www.gitlab.com/dwt1/
 # |____/ |_|
@@ -15,8 +14,10 @@ set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "emacsclient -t -a ''"                 # $EDITOR use Emacs in terminal
-set VISUAL "emacsclient -c -a emacs"              # $VISUAL use Emacs in GUI mode
+set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
+set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
+
+set -gx DYLAN_TOKEN "MTExNzE3MTI0MDMxOTMzMjQ1NA.GmznlK.51oufSbMb2tQVhBj6AzroIyVfdeMaof9DtZEWg"
 
 ### SET MANPAGER
 ### Uncomment only one of these!
@@ -31,11 +32,30 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # set -x MANPAGER "nvim -c 'set ft=man' -"
 
 ### SET EITHER DEFAULT EMACS MODE OR VI MODE ###
-function fish_user_key_bindings
-  # fish_default_key_bindings
+fish_vi_key_bindings
+fish_user_key_bindings
+
+if status is-interactive
+  # I'm trying to grow a neckbeard
   fish_vi_key_bindings
+  # Set the cursor shapes for the different vi modes.
+
+  set fish_cursor_default     block      blink
+  set fish_cursor_insert      line       blink
+  set fish_cursor_replace_one underscore blink
+  set fish_cursor_visual      block
 end
+
 ### END OF VI MODE ###
+set -U FZF_CD_WITH_HIDDEN_COMMAND "fd -H -u --type d --exclude node_modules . \$dir"
+set -U FZF_OPEN_COMMAND "fd -H -u --type f --exclude node_modules . \$dir"
+set -U FZF_TMUX 1
+set -e FZF_COMPLETE 0
+bind -M insert -e \t '__fzf_complete'
+set -U FZF_ENABLE_OPEN_PREVIEW 0
+
+bind -M insert \ee vim
+bind -M insert \er "vim /"
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal brcyan
@@ -221,13 +241,9 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
 # vim and emacs
-alias vim='nvim'
-alias em='/usr/bin/emacs -nw'
-alias emacs="emacsclient -c -a 'emacs'"
-alias doomsync="~/.emacs.d/bin/doom sync"
-alias doomdoctor="~/.emacs.d/bin/doom doctor"
-alias doomupgrade="~/.emacs.d/bin/doom upgrade"
-alias doompurge="~/.emacs.d/bin/doom purge"
+ alias vim='nvim'
+
+alias code="~/VSCode-linux-x64/bin/code"
 
 # Changing "ls" to "exa"
 alias ls='exa -al --color=always --group-directories-first' # my preferred listing
@@ -237,6 +253,7 @@ alias lt='exa -aT --color=always --group-directories-first' # tree listing
 alias l.='exa -a | egrep "^\."'
 
 # pacman and yay
+alias unpac='sudo pacman -Rcns'                  # update only standard pkgs
 alias pac='sudo pacman -S'                  # update only standard pkgs
 alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
 alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
@@ -246,6 +263,8 @@ alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
 alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
 alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # remove orphaned packages
+alias pacl="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias pacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 
 # get fastest mirrors
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -344,11 +363,6 @@ alias tips="lbrynet txo spend --type=support --is_not_my_input --blocking"
 # Mocp must be launched with bash instead of Fish!
 alias mocp="bash -c mocp"
 
-### DTOS ###
-# Copy/paste all content of /etc/dtos over to home folder. A backup of config is created. (Be careful running this!)
-alias dtoscopy='[ -d ~/.config ] || mkdir ~/.config && cp -Rf ~/.config ~/.config-backup-(date +%Y.%m.%d-%H.%M.%S) && cp -rf /etc/dtos/* ~'
-# Backup contents of /etc/dtos to a backup folder in $HOME.
-alias dtosbackup='cp -Rf /etc/dtos ~/dtos-backup-(date +%Y.%m.%d-%H.%M.%S)'
 
 alias ff='sudo find / -iname'
 ### RANDOM COLOR SCRIPT ###
@@ -358,3 +372,4 @@ colorscript random
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
+

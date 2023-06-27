@@ -70,7 +70,6 @@ M.nvimtree = {
 M.telescope = {
   defaults = {
     file_ignore_patterns = { "node_modules" , ".git", "yarn.lock", ".pyc", "__pycache__", "postgres_data", ".rustup" },
-
     mappings = {
       i = {
         ["<C-j>"] = "move_selection_next",
@@ -80,6 +79,7 @@ M.telescope = {
     },
   },
   extensions_list = {
+    "themes",
     "file_browser",
     "projects",
   },
