@@ -82,6 +82,8 @@ M.telescope = {
     "themes",
     "file_browser",
     "projects",
+    "undo",
+    "docker",
   },
 	extensions = {
 		file_browser = {

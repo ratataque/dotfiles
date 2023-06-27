@@ -39,7 +39,15 @@ M.general = {
     ["<C-k>"] = { "<cmd> tabprevious<CR>", "Previous tab" },
 
     ["<leader>uu"] = { "<cmd> Lazy update<CR>", "Lazy upadate" },
+
+    ["<leader>mm"] = { "<cmd>lua require('treesj').toggle()<CR>", "toogle array" },
+
   }
+}
+
+M.disabled = {
+    ["z"] = "",
+    ["f"] = "",
 }
 
 M.comment = {
@@ -112,6 +120,50 @@ M.telescope = {
     ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
 
     ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
+  },
+}
+
+M.tabufline = {
+  plugin = true,
+
+  n = {
+    -- close buffer + hide terminal buffer
+    ["<C-x>"] = {
+      function()
+        require("nvchad_ui.tabufline").close_buffer()
+      end,
+      " Close buffer",
+    },
+  },
+}
+
+M.session = {
+  n = {
+    ["<leader>sl"] = {
+      function()
+        require("nvim-possession").list()
+      end,
+      " List session",
+    },
+    ["<leader>sn"] = {
+      function()
+        require("nvim-possession").new()
+      end,
+      " New session",
+    },
+    ["<leader>sd"] = {
+      function()
+        require("nvim-possession").delete()
+      end,
+      " Delete session",
+    },
+  },
+}
+
+M.diagnostics = {
+  n = {
+    ["<leader>t"] = { "<cmd>TroubleToggle<cr>", "󰔫 Toggle warnings" },
+    ["<leader>td"] = { "<cmd>TodoTrouble keywords=TODO,FIX,FIXME,BUG,TEST,NOTE<cr>", " Todo/Fix/Fixme" },
   },
 }
 

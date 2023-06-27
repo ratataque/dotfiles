@@ -17,7 +17,6 @@ set TERM "xterm-256color"                         # Sets the terminal type
 set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
 set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
 
-set -gx DYLAN_TOKEN "MTExNzE3MTI0MDMxOTMzMjQ1NA.GmznlK.51oufSbMb2tQVhBj6AzroIyVfdeMaof9DtZEWg"
 
 ### SET MANPAGER
 ### Uncomment only one of these!
@@ -48,6 +47,7 @@ end
 
 ### END OF VI MODE ###
 set -U FZF_CD_WITH_HIDDEN_COMMAND "fd -H -u --type d --exclude node_modules . \$dir"
+bind -M insert \cf '__fzf_cd --hidden'
 set -U FZF_OPEN_COMMAND "fd -H -u --type f --exclude node_modules . \$dir"
 set -U FZF_TMUX 1
 set -e FZF_COMPLETE 0
@@ -56,6 +56,10 @@ set -U FZF_ENABLE_OPEN_PREVIEW 0
 
 bind -M insert \ee vim
 bind -M insert \er "vim /"
+bind -M insert \e. __fish_list_current_token # my preferred listing
+bind -M insert \ea "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+bind -M insert \ez "pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal brcyan

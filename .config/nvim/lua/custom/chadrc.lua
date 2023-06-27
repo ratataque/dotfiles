@@ -28,7 +28,7 @@ M.ui = {
       { "  File Browser", "c d    ", "Telescope file_browser" },
       { "󰈭  Global Search", "Spc f w", "Telescope live_grep" },
       { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
-      -- { "󰔫 Diagnostics", "Spc t  ", "TroubleToggle"},
+      { "󰔫 Diagnostics", "Spc t  ", "TroubleToggle"},
       { "  Bookmarks", "Spc m a", "Telescope marks" },
       { "  Themes", "Spc t h", "Telescope themes" },
       { "  Mappings", "Spc c h", "NvCheatsheet" },
