@@ -99,6 +99,8 @@ M.telescope = {
     ["<leader>fk"] = { "<cmd>Telescope keymaps<CR>", " Find keymaps" },
     ["<leader>."] = { "<cmd> Telescope find_files <CR>", "Find files" },
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
+    ["<leader>fd"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true cwd=~/dotfiles_telescope/ depth=1<CR>", "Find dotfiles" },
+    ["<leader>o"] = { "<cmd> FzfLua files cwd=~ <CR>", "Find all" },
     ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
     ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
