@@ -16,9 +16,9 @@ lspconfig.rust_analyzer.setup({
 lspconfig.pyright.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"python"},
-  root_dir = function(fname)
-    return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or
-    util.path.dirname(fname)
-  end 
+  filetypes = { "python" },
+  -- root_dir = function(fname)
+  --   return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or
+  --   util.path.dirname(fname)
+  -- end
 })

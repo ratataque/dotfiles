@@ -45,7 +45,7 @@ M.mason = {
     "clang-format",
 
     -- python
-    "python",
+    "pyright",
   },
 }
 
