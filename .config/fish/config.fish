@@ -11,11 +11,17 @@
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
 
+set -U fish_user_paths $HOME/.tmuxifier/bin $fish_user_paths
+eval (tmuxifier init - fish)
+alias tm="tmuxifier"
+
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
 set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
+set -gx EDITOR "nvim"                 # $EDITOR use Emacs in terminal
 set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
+set -gx VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
 
 
 ### SET MANPAGER
@@ -232,7 +238,7 @@ end
 ### ALIASES ###
 # \x1b[2J   <- clears tty
 # \x1b[1;1H <- goes to (1, 1) (start)
-alias clear='echo -en "\x1b[2J\x1b[1;1H" ; echo; echo; seq 1 (tput cols) | sort -R | spark | lolcat; echo; echo'
+# alias clear='echo -en "\x1b[2J\x1b[1;1H" ; echo; echo; seq 1 (tput cols) | sort -R | spark | lolcat; echo; echo'
 
 # root privileges
 alias doas="doas --"
@@ -372,7 +378,7 @@ alias ff='sudo find / -iname'
 ### RANDOM COLOR SCRIPT ###
 # Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
 # Or install it from the Arch User Repository: shell-color-scripts
-colorscript random
+# colorscript random
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source

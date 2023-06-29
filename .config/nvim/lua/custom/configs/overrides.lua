@@ -13,6 +13,7 @@ M.treesitter = {
     "markdown",
     "markdown_inline",
     "python",
+    "fish"
   },
   indent = {
     enable = true,
@@ -20,6 +21,10 @@ M.treesitter = {
     --   "python"
     -- },
   },
+}
+
+M.harpoon = {
+
 }
 
 M.mason = {

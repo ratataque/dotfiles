@@ -21,9 +21,10 @@ local plugins = {
     "kdheepak/lazygit.nvim",
     cmd = "LazyGit",
   },
-  {
-    "nvim-tree/nvim-tree.lua",
-    -- lazy = false,
+ {
+    "ThePrimeagen/harpoon",
+    lazy = false,
+    opts = overrides.harpoon,
   },
   {
     "gennaro-tedesco/nvim-possession",

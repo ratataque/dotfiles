@@ -12,15 +12,18 @@ M.text = {
   },
 
   v = {
-    ["<C-Up>"] = { ":m'<-2<CR>gv=gv", "󰜸 Move selection up", opts = { silent = true } },
-    ["<C-Down>"] = { ":m'>+1<CR>gv=gv", "󰜯 Move selection down", opts = { silent = true } },
+    -- ["<C-k"] = { "<cmd> :m '<-2<CR>gv=gv", "󰜸 Move selection up", opts = { silent = true } },
+    -- ["<C-j>"] = { "<cmd> :m '>+1<CR>gv=gv", "󰜯 Move selection down", opts = { silent = true } },
   },
 
   c = {
-    ["<C-j>"] = { "<C-n>", "nav next "},
     ["<C-k>"] = { "<C-p>", "nav prev "},
+    ["<C-j>"] = { "<C-n>", "nav next "},
   },
 }
+
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR> gv=gv")
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR> gv=gv")
 
 M.general = {
   i = {
@@ -42,6 +45,17 @@ M.general = {
 
     ["<leader>mm"] = { "<cmd>lua require('treesj').toggle()<CR>", "toogle array" },
 
+    ["<leader>a"] = { "<cmd> :lua require('harpoon.mark').add_file() <CR>", "toogle array" },
+    ["<C-e>"] = { "<cmd> :lua require('harpoon.ui').toggle_quick_menu() <CR>", "toogle array" },
+
+    ["<A-f>"] = { "<cmd> :lua require('harpoon.ui').nav_file(1) <CR>", "Harpoon swtich 1" },
+    ["<A-d>"] = { "<cmd> :lua require('harpoon.ui').nav_file(2) <CR>", "Harpoon swtich 2" },
+    ["<A-s>"] = { "<cmd> :lua require('harpoon.ui').nav_file(3) <CR>", "Harpoon swtich 3" },
+    ["<A-a>"] = { "<cmd> :lua require('harpoon.ui').nav_file(4) <CR>", "Harpoon swtich 4" },
+  },
+
+  x = {
+    ["<leader>p"] = { "\"_dp", "paste du sale" },
   }
 }
 
@@ -155,7 +169,7 @@ M.session = {
     },
     ["<leader>su"] = {
       function()
-        require("nvim-possession").new()
+        require("nvim-possession").update()
       end,
       " Update session",
     },
