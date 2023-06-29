@@ -36,6 +36,7 @@ local plugins = {
         autoload = false,
         sessions = {
           sessions_icon = "",
+          sessions_path = "/sessions/"
         },
       }
     end,

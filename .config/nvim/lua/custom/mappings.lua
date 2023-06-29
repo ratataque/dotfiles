@@ -32,11 +32,11 @@ M.general = {
     ["<C-h>"] = { "<C-w>h", "Window left" },
     ["<C-l>"] = { "<C-w>l", "Window right" },
 
-    ["<A-e>"] = { "<cmd> q<CR>", "Exit" },
+    ["<A-e>"] = { "<cmd> qa<CR>", "Exit" },
 
     ["<A-r>"] = { "<cmd> tabnew<CR>", "New tab" },
-    ["<C-j>"] = { "<cmd> tabnext<CR>", "Next tab" },
-    ["<C-k>"] = { "<cmd> tabprevious<CR>", "Previous tab" },
+    ["<C-k>"] = { "<cmd> tabnext<CR>", "Next tab" },
+    ["<C-j>"] = { "<cmd> tabprevious<CR>", "Previous tab" },
 
     ["<leader>uu"] = { "<cmd> Lazy update<CR>", "Lazy upadate" },
 
@@ -152,6 +152,12 @@ M.session = {
         require("nvim-possession").new()
       end,
       " New session",
+    },
+    ["<leader>su"] = {
+      function()
+        require("nvim-possession").new()
+      end,
+      " Update session",
     },
     ["<leader>sd"] = {
       function()
