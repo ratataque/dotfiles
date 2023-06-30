@@ -45,8 +45,8 @@ M.general = {
 
     ["<leader>mm"] = { "<cmd>lua require('treesj').toggle()<CR>", "toogle array" },
 
-    ["<leader>a"] = { "<cmd> :lua require('harpoon.mark').add_file() <CR>", "toogle array" },
-    ["<C-e>"] = { "<cmd> :lua require('harpoon.ui').toggle_quick_menu() <CR>", "toogle array" },
+    ["<leader>a"] = { "<cmd> :lua require('harpoon.mark').add_file() <CR>", "add harpoon" },
+    ["<C-e>"] = { "<cmd> :lua require('harpoon.ui').toggle_quick_menu() <CR>", "harpoon ui" },
 
     ["<A-f>"] = { "<cmd> :lua require('harpoon.ui').nav_file(1) <CR>", "Harpoon swtich 1" },
     ["<A-d>"] = { "<cmd> :lua require('harpoon.ui').nav_file(2) <CR>", "Harpoon swtich 2" },
