@@ -13,6 +13,7 @@ local plugins = {
     opts = {
       ensure_installed = {
         "rust-analyzer",
+        "phpactor",
         "black",
         "pyright",
         "mypy",

@@ -13,7 +13,8 @@ M.treesitter = {
     "markdown",
     "markdown_inline",
     "python",
-    "fish"
+    "fish",
+    "php",
   },
   indent = {
     enable = true,
@@ -46,6 +47,9 @@ M.mason = {
 
     -- python
     "pyright",
+
+    --php
+    "phpactor",
   },
 }
 

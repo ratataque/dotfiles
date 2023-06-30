@@ -1,14 +1,14 @@
 ---@type ChadrcConfig 
 local M = {}
 M.ui = {
-  theme = 'onedark',
-  theme_toggle = { "onedark", "nord"},
+  theme = 'catppuccin',
+  theme_toggle = { "catppuccin", "nord"},
 
-  -- hl_override = {
-  --   ["Normal"] = { bg = "NONE"},
-  --   ["NormalFloat"] = { bg = "NONE"},
+  hl_override = {
+    ["Normal"] = { bg = "NONE"},
+    ["NormalFloat"] = { bg = "NONE"},
   --   ["NvimTreeNormal"] = { bg = "NONE"},
-  -- },
+  },
 
   statusline = {
     overriden_modules = function()

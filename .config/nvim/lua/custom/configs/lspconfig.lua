@@ -22,3 +22,30 @@ lspconfig.pyright.setup({
   --   util.path.dirname(fname)
   -- end
 })
+
+lspconfig.phpactor.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "php" },
+  root_dir = function()
+    return vim.loop.cwd()
+  end;
+})
+
+-- lspconfig.eslint.setup({
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   filetypes = { "javascript" },
+--   root_dir = function()
+--     return vim.loop.cwd()
+--   end;
+-- })
+
+lspconfig.tsserver.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "javascript" },
+  root_dir = function()
+    return vim.loop.cwd()
+  end;
+})
