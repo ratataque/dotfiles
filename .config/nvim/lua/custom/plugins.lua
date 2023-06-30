@@ -133,7 +133,10 @@ local plugins = {
       -- refer to the configuration section below
     },
   },
-
+  {
+    "airblade/vim-rooter",
+    lazy = false,
+  },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
