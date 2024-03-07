@@ -1,0 +1,24 @@
+lastupdatecheck: 0
+recentrepos:
+- /home/ewan/dotfiles
+- /home/ewan/projets/resources_relationnelles
+- /home/ewan/projets/intranet_wgf
+- /home/ewan/.config/nvim
+- /home/ewan/projets/Astro_droid
+- /home/ewan/projets/Mobil-test
+- /home/ewan/projets/advent_of_code_23
+- /home/ewan/projets/home
+- /home/ewan/projets/Bot-trop-sex
+- /home/ewan/Adv360-Pro-ZMK
+- /home/ewan/projets/todolist
+- /home/ewan/projets/projet_igniter
+startuppopupversion: 5
+customcommandshistory:
+- git push welcomeView-reworked
+- git config rebase false
+- git config pull.rebase false
+- git rm -r --cached .idea
+- git push origin main:welcomeView-reworked
+- git pull main
+hidecommandlog: false
+ignorewhitespaceindiffview: false

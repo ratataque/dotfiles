@@ -14,8 +14,12 @@ set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
 set -U fish_user_paths $HOME/.tmuxifier/bin $fish_user_paths
 eval (tmuxifier init - fish)
 alias tm="tmuxifier"
+alias tmux="tmux -u"
+alias discord="discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto &"
 
 ### EXPORT ###
+set -gx LC_ALL "C"
+set -gx RUST_BACKTRACE 1
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
 set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
@@ -51,7 +55,7 @@ if status is-interactive
   set fish_cursor_visual      block
 end
 
-### END OF VI MODE ###
+### END OF VI MODE ###fish
 set -U FZF_CD_WITH_HIDDEN_COMMAND "fd -H -u --type d --exclude node_modules . \$dir"
 bind -M insert \cf '__fzf_cd --hidden'
 set -U FZF_OPEN_COMMAND "fd -H -u --type f --exclude node_modules . \$dir"
@@ -60,9 +64,14 @@ set -e FZF_COMPLETE 0
 bind -M insert -e \t '__fzf_complete'
 set -U FZF_ENABLE_OPEN_PREVIEW 0
 
+bind -M insert \cu true
+bind -M insert \cU /cU
+
+bind -M insert \e. "vim ."
 bind -M insert \ee vim
-bind -M insert \er "vim /"
-bind -M insert \e. __fish_list_current_token # my preferred listing
+bind -M insert \er "ranger"
+bind -M insert \e\x20 __fish_list_current_token # my preferred listing
+bind -e \el 
 bind -M insert \ea "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 bind -M insert \ez "pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 
@@ -75,58 +84,6 @@ set fish_color_error '#ff6c6b'
 set fish_color_param brcyan
 
 ### SPARK ###
-set -g spark_version 1.0.0
-
-complete -xc spark -n __fish_use_subcommand -a --help -d "Show usage help"
-complete -xc spark -n __fish_use_subcommand -a --version -d "$spark_version"
-complete -xc spark -n __fish_use_subcommand -a --min -d "Minimum range value"
-complete -xc spark -n __fish_use_subcommand -a --max -d "Maximum range value"
-
-function spark -d "sparkline generator"
-    if isatty
-        switch "$argv"
-            case {,-}-v{ersion,}
-                echo "spark version $spark_version"
-            case {,-}-h{elp,}
-                echo "usage: spark [--min=<n> --max=<n>] <numbers...>  Draw sparklines"
-                echo "examples:"
-                echo "       spark 1 2 3 4"
-                echo "       seq 100 | sort -R | spark"
-                echo "       awk \\\$0=length spark.fish | spark"
-            case \*
-                echo $argv | spark $argv
-        end
-        return
-    end
-
-    command awk -v FS="[[:space:],]*" -v argv="$argv" '
-        BEGIN {
-            min = match(argv, /--min=[0-9]+/) ? substr(argv, RSTART + 6, RLENGTH - 6) + 0 : ""
-            max = match(argv, /--max=[0-9]+/) ? substr(argv, RSTART + 6, RLENGTH - 6) + 0 : ""
-        }
-        {
-            for (i = j = 1; i <= NF; i++) {
-                if ($i ~ /^--/) continue
-                if ($i !~ /^-?[0-9]/) data[count + j++] = ""
-                else {
-                    v = data[count + j++] = int($i)
-                    if (max == "" && min == "") max = min = v
-                    if (max < v) max = v
-                    if (min > v ) min = v
-                }
-            }
-            count += j - 1
-        }
-        END {
-            n = split(min == max && max ? "▅ ▅" : "▁ ▂ ▃ ▄ ▅ ▆ ▇ █", blocks, " ")
-            scale = (scale = int(256 * (max - min) / (n - 1))) ? scale : 1
-            for (i = 1; i <= count; i++)
-                out = out (data[i] == "" ? " " : blocks[idx = int(256 * (data[i] - min) / scale) + 1])
-            print out
-        }
-    '
-end
-### END OF SPARK ###
 
 
 ### FUNCTIONS ###
@@ -189,50 +146,6 @@ function copy
     end
 end
 
-# Function for printing a column (splits input on whitespace)
-# ex: echo 1 2 3 | coln 3
-# output: 3
-function coln
-    while read -l input
-        echo $input | awk '{print $'$argv[1]'}'
-    end
-end
-
-# Function for printing a row
-# ex: seq 3 | rown 3
-# output: 3
-function rown --argument index
-    sed -n "$index p"
-end
-
-# Function for ignoring the first 'n' lines
-# ex: seq 10 | skip 5
-# results: prints everything but the first 5 lines
-function skip --argument n
-    tail +(math 1 + $n)
-end
-
-# Function for taking the first 'n' lines
-# ex: seq 10 | take 5
-# results: prints only the first 5 lines
-function take --argument number
-    head -$number
-end
-
-# Function for org-agenda
-function org-search -d "send a search string to org-mode"
-    set -l output (/usr/bin/emacsclient -a "" -e "(message \"%s\" (mapconcat #'substring-no-properties \
-        (mapcar #'org-link-display-format \
-        (org-ql-query \
-        :select #'org-get-heading \
-        :from  (org-agenda-files) \
-        :where (org-ql--query-string-to-sexp \"$argv\"))) \
-        \"
-    \"))")
-    printf $output
-end
-
-### END OF FUNCTIONS ###
 
 
 ### ALIASES ###
@@ -265,7 +178,7 @@ alias l.='exa -a | egrep "^\."'
 # pacman and yay
 alias unpac='sudo pacman -Rcns'                  # update only standard pkgs
 alias pac='sudo pacman -S'                  # update only standard pkgs
-alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
+alias pacu='sudo pacman -Syu'                  # update only standard pkgs
 alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
 alias yaysua='yay -Sua --noconfirm'              # update only AUR pkgs (yay)
 alias yaysyu='yay -Syu --noconfirm'              # update standard pkgs and AUR pkgs (yay)
@@ -295,10 +208,6 @@ alias rm='rm -i'
 # adding flags
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
-alias lynx='lynx -cfg=~/.lynx/lynx.cfg -lss=~/.lynx/lynx.lss -vikeys'
-alias vifm='./.config/vifm/scripts/vifmrun'
-alias ncmpcpp='ncmpcpp ncmpcpp_directory=$HOME/.config/ncmpcpp/'
-alias mocp='mocp -M "$XDG_CONFIG_HOME"/moc -O MOCDir="$XDG_CONFIG_HOME"/moc'
 
 # ps
 alias psa="ps auxf"
@@ -325,53 +234,9 @@ alias newtag='git tag -a'
 # get error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-# gpg encryption
-# verify signature for isos
-alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
-# receive the key of a developer
-alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
-
-# Play audio files in current dir by type
-alias playwav='deadbeef *.wav'
-alias playogg='deadbeef *.ogg'
-alias playmp3='deadbeef *.mp3'
-
-# Play video files in current dir by type
-alias playavi='vlc *.avi'
-alias playmov='vlc *.mov'
-alias playmp4='vlc *.mp4'
-
-# youtube-dl
-alias yta-aac="youtube-dl --extract-audio --audio-format aac "
-alias yta-best="youtube-dl --extract-audio --audio-format best "
-alias yta-flac="youtube-dl --extract-audio --audio-format flac "
-alias yta-m4a="youtube-dl --extract-audio --audio-format m4a "
-alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
-alias yta-opus="youtube-dl --extract-audio --audio-format opus "
-alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
-alias yta-wav="youtube-dl --extract-audio --audio-format wav "
-alias ytv-best="youtube-dl -f bestvideo+bestaudio "
-
-# switch between shells
-# I do not recommend switching default SHELL from bash.
-alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
-alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
-
-# bare git repo alias for dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
-
-# termbin
-alias tb="nc termbin.com 9999"
-
 # the terminal rickroll
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
-# Unlock LBRY tips
-alias tips="lbrynet txo spend --type=support --is_not_my_input --blocking"
-
-# Mocp must be launched with bash instead of Fish!
-alias mocp="bash -c mocp"
 
 
 alias ff='sudo find / -iname'
