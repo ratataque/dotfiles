@@ -1,0 +1,143 @@
+--[[
+####################################
+##  doom-one-01.conkyrc (XMonad)  ##
+####################################
+]]
+
+conky.config = {
+    alignment = 'ml',
+    background = false,
+    border_width = 1,
+	border_inner_margin = 15,
+    color1 = '19A094',
+    color2 = 'FF5252',
+    cpu_avg_samples = 2,
+	default_color = 'grey',
+    default_outline_color = 'grey',
+    default_shade_color = 'grey',
+	double_buffer = true,
+	draw_borders = true,
+    draw_graph_borders = false,
+    draw_outline = false,
+    draw_shades = false,
+    use_xft = true,
+    font = 'Monaco:bold:size=12',
+	font1  = 'Source Code Pro:bold:size=14',  	-- the default font used
+	font2 = 'Raleway:bold:size=68',         	-- font for the time
+	font3 = 'Ubuntu:bold:size=19',               	-- font for the date
+	font4 = 'Raleway:bold:size=14',              -- font for the keybindings heading
+    gap_x = 120,
+    gap_y = 0,
+    minimum_height = 5,
+    maximum_width = 400,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    own_window = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_class = 'Conky',
+    own_window_type = 'dock',
+    own_window_color = '19A094',
+    own_window_transparent = false,
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
+    stippled_borders = 0,
+    border_width = 0,
+    update_interval = 1.2,
+    uppercase = none,
+    use_spacer = 'left',
+    show_graph_scale = false,
+    show_graph_range = false
+}
+
+conky.text = [[
+$alignc ${font Roboto:style=Medium:pixelsize=35} ${color grey}\
+${alignc}${color2}${font2}${goto 150}${time %H:%M}${font3}
+${voffset 12}${alignc}${color2}${font3}${goto 8}${time %b %d, %Y}${font1}${color}
+${font}
+
+$alignr ${color1}\
+Uptime:$color $uptime
+${color1}${font Roboto Mono:style=Bold}\
+SYSTEM$color $hr\
+${font}
+${color2}CPU : ${color1}${goto 240}\
+$cpu% ${goto 280}${cpubar cpu0 10,140}
+${color2}RAM :${color grey} $mem/$memmax\
+ ${color1}${goto 240}$memperc% ${goto 280}${membar 10,140}
+${color2}Swap:${color grey} $swap/$swapmax\
+ ${color1}${goto 240}$swapperc% ${goto 280}${swapbar 10,140}
+${color2}Temp: ${color grey}${acpitemp}°C
+
+${color white}CPU1: ${color1}${cpu cpu1}% ${cpubar cpu1 10,100}\
+  ${color white}${goto 220}CPU2: ${color1}${cpu cpu2}% ${cpubar cpu2 10,100}
+${color white}CPU3: ${color1}${cpu cpu3}% ${cpubar cpu3 10,100}\
+  ${color white}${goto 220}CPU4: ${color1}${cpu cpu4}% ${cpubar cpu4 10,100}
+
+${color2}/ ${color grey}\
+ ${goto 90}${fs_used /}/${fs_size /}${color}\
+ ${goto 250}${color grey}${color1}${fs_used_perc /}% ${fs_bar 10,120 /}
+${color2}/home ${color grey}\
+ ${goto 90}${fs_used /home}/${fs_size /home}${color}\
+ ${goto 250}${color grey}${color1}${fs_used_perc /home}% ${fs_bar 10,120 /home}
+${color2}Common ${color grey}\
+ ${goto 90}${fs_used /mnt/AAFC47B3FC477919}/${fs_size /mnt/AAFC47B3FC477919}${color}\
+ ${goto 250}${color grey}${color1}${fs_used_perc /mnt/AAFC47B3FC477919}% ${fs_bar 10,120 /mnt/AAFC47B3FC477919}
+${if_existing /media/trip-3r/Phoenix}\
+${color2}Phoenix ${color grey}\
+ ${goto 90}${fs_used /media/trip-3r/Phoenix}/${fs_size /media/trip-3r/Phoenix}${color} \
+${goto 250}${color grey}${color1}${fs_used_perc /media/trip-3r/Phoenix}% ${fs_bar 10,120 /media/trip-3r/Phoenix}
+${endif}
+${color1}${font Roboto Regular:style=Bold}\
+NETWORKING$color${font} $hr
+${color2} External IP:$color ${exec curl -s www.icanhazip.com}
+${if_up enx00e100004d8c}\
+${color2}enx00e100004d8c\
+ ${color}${font}${goto 270}${addrs enx00e100004d8c}
+ ${color}Total:${totaldown enx00e100004d8c} \
+ ${goto 210}${color}Total:${totalup enx00e100004d8c}
+${downspeedgraph enx00e100004d8c 30,195 00ffff 19a094} \
+${upspeedgraph enx00e100004d8c 30,195 00ffff 19A094}
+
+${endif}\
+${if_up wlp1s0}\
+${color}${font}\
+${color2}wlp1s0\
+ ${color}${font}${goto 270}${addr wlp1s0}
+ ${color white}${font}Strength:$color${wireless_link_qual_perc wlp1s0}%\
+ ${goto 200}${color white}MAC: ${color}${wireless_ap wlp1s0}
+ ${color}Total:${totaldown wlp1s0} \
+ ${goto 210}${color}Total:${totalup wlp1s0}
+${downspeedgraph wlp1s0 30,195 00ffff 19A094} \
+${upspeedgraph wlp1s0 30,195 00ffff 19A094}
+
+${endif}\
+${if_up tun0}\
+${color}${font}\
+${color2}tun0\
+ ${color}${font}${goto 270}${addr tun0}
+ ${color}Total:${totaldown tun0} \
+ ${goto 210}${color}Total:${totalup tun0}
+${downspeedgraph tun0 30,195 00ffff 19A094} \
+${upspeedgraph tun0 30,195 00ffff 19A094}
+${endif}
+${color1}${font Roboto Mono:style=Bold}\
+${voffset 18}${color1}${alignc}${font4}XMONAD KEYBINDINGS${font1}${color}
+${color1}${hr}${color}
+${color}[S]+e, n${alignr}${color}elfeed${color}
+${color}[S]+e, s${alignr}${color}eshell${color}
+${color}[S]+e, v${alignr}${color}vterm${color}
+${color1}${hr}${color}
+${color}[S]+p, h${alignr}${color}dm-hub${color}
+${color}[S]+p, b${alignr}${color}dm-setbg${color}
+${color}[S]+p, e${alignr}${color}dm-confedit${color}
+${color}[S]+p, m${alignr}${color}dm-man${color}
+${color}[S]+p, o${alignr}${color}dm-bookman${color}
+${color}[S]+p, s${alignr}${color}dm-websearch${color}
+${color1}${hr}${color}
+${color}[M]+[C]+/, s${alignr}${color}UnMergeAll${color}
+${color}[M]+s, t${alignr}${color}scratch term${color}
+${color}[M]+s, c${alignr}${color}calc${color}
+]]
